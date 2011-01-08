@@ -25,11 +25,7 @@
 %endif
 
 # define fortran compiler
-%if %{mdkversion} >= 200600
 %define fortran_compiler gfortran
-%else
-%define fortran_compiler g77
-%endif
 
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
@@ -100,7 +96,6 @@ should install libtool.
 %package base
 Group:		Development/C
 Summary:	Basic package for %{name}
-Conflicts:	libtool < 1.5.20-4mdk
 # since Jan 2009, cputoolize is deprecated and partially broken
 # so ensure old %%configure (which was calling cputoolize) is not installed:
 Conflicts:	rpm-manbo-setup-build < 2-15
@@ -230,16 +225,8 @@ rm -fr %{buildroot}
 %post base
 %_install_info %{name}.info
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
 %preun base
 %_remove_install_info %{name}.info
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files
 %defattr(-,root,root)
