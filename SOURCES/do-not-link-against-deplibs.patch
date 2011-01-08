@@ -1,0 +1,51 @@
+Do not link against deplibs.  This is not needed for shared libs
+on atleast ELF systems since those already know which libs they
+need themself.  This seems to break a few things and will be fixed
+in a better way in a future upstream version.
+
+from debian, cf http://wiki.mandriva.com/en/Overlinking
+
+diff -p -up libtool-2.4/libltdl/config/ltmain.m4sh.overlinking libtool-2.4/libltdl/config/ltmain.m4sh
+--- libtool-2.4/libltdl/config/ltmain.m4sh.overlinking	2010-11-25 21:24:12.238339082 +0100
++++ libtool-2.4/libltdl/config/ltmain.m4sh	2010-11-25 21:24:12.268338244 +0100
+@@ -5325,7 +5325,10 @@ func_mode_link ()
+ 	case $pass in
+ 	dlopen) libs="$dlfiles" ;;
+ 	dlpreopen) libs="$dlprefiles" ;;
+-	link) libs="$deplibs %DEPLIBS% $dependency_libs" ;;
++	link)
++	  libs="$deplibs %DEPLIBS%"
++	  test "X$link_all_deplibs" != Xno && libs="$libs $dependency_libs"
++	  ;;
+ 	esac
+       fi
+       if test "$linkmode,$pass" = "lib,dlpreopen"; then
+diff -p -up libtool-2.4/libltdl/m4/libtool.m4.overlinking libtool-2.4/libltdl/m4/libtool.m4
+--- libtool-2.4/libltdl/m4/libtool.m4.overlinking	2010-11-25 21:35:38.855157019 +0100
++++ libtool-2.4/libltdl/m4/libtool.m4	2010-11-25 21:35:11.720915080 +0100
+@@ -4517,6 +4517,9 @@ m4_if([$1], [CXX], [
+       ;;
+     esac
+     ;;
++  linux* | k*bsd*-gnu)
++    _LT_TAGVAR(link_all_deplibs, $1)=no
++    ;;
+   *)
+     _LT_TAGVAR(export_symbols_cmds, $1)='$NM $libobjs $convenience | $global_symbol_pipe | $SED '\''s/.* //'\'' | sort | uniq > $export_symbols'
+     ;;
+@@ -4979,6 +4982,7 @@ _LT_EOF
+ 	if test "$aix_use_runtimelinking" = yes; then
+ 	  shared_flag="$shared_flag "'${wl}-G'
+ 	fi
++	_LT_TAGVAR(link_all_deplibs, $1)=no
+       else
+ 	# not using gcc
+ 	if test "$host_cpu" = ia64; then
+@@ -5984,6 +5988,7 @@ if test "$_lt_caught_CXX_error" != yes;
+ 	  if test "$aix_use_runtimelinking" = yes; then
+ 	    shared_flag="$shared_flag "'${wl}-G'
+ 	  fi
++	  _LT_TAGVAR(link_all_deplibs, $1)=no
+         else
+           # not using gcc
+           if test "$host_cpu" = ia64; then

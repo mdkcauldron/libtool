@@ -1,0 +1,27 @@
+--- libtool-2.4/libltdl/config/ltmain.m4sh.relink	2010-11-25 21:17:49.073039644 +0100
++++ libtool-2.4/libltdl/config/ltmain.m4sh	2010-11-25 21:17:54.380891441 +0100
+@@ -7433,15 +7433,23 @@
+ 	fi
+ 
+ 	tmp_deplibs=
++	inst_prefix_arg=
+ 	for test_deplib in $deplibs; do
+ 	  case " $convenience " in
+ 	  *" $test_deplib "*) ;;
+ 	  *)
+-	    func_append tmp_deplibs " $test_deplib"
++	    if test -n "$inst_prefix_dir" && test "$inst_prefix_dir" != "/" && (echo "$test_deplib" | grep -- "$inst_prefix_dir" >/dev/null); then
++	    	func_append inst_prefix_arg " $test_deplib"
++	    else
++		func_append tmp_deplibs " $test_deplib"
++	    fi
+ 	    ;;
+ 	  esac
+ 	done
+ 	deplibs="$tmp_deplibs"
++	if test -n "$inst_prefix_arg"; then
++		deplibs="$inst_prefix_arg $deplibs"
++	fi
+ 
+ 	if test -n "$convenience"; then
+ 	  if test -n "$whole_archive_flag_spec" &&

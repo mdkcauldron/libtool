@@ -1,0 +1,28 @@
+diff -p -up libtool-2.4/libltdl/m4/libtool.m4.gcj-no-cflags libtool-2.4/libltdl/m4/libtool.m4
+--- libtool-2.4/libltdl/m4/libtool.m4.gcj-no-cflags	2010-11-25 21:40:08.876613411 +0100
++++ libtool-2.4/libltdl/m4/libtool.m4	2010-11-25 21:42:39.424407085 +0100
+@@ -7397,10 +7397,6 @@ lt_simple_link_test_code='public class c
+ # ltmain only uses $CC for tagged configurations so make sure $CC is set.
+ _LT_TAG_COMPILER
+ 
+-# save warnings/boilerplate of simple test code
+-_LT_COMPILER_BOILERPLATE
+-_LT_LINKER_BOILERPLATE
+-
+ # Allow CC to be a program name with arguments.
+ lt_save_CC=$CC
+ lt_save_CFLAGS=$CFLAGS
+@@ -7413,6 +7409,13 @@ _LT_TAGVAR(compiler, $1)=$CC
+ _LT_TAGVAR(LD, $1)="$LD"
+ _LT_CC_BASENAME([$compiler])
+ 
++ac_compile='$CC -c $GCJFLAGS conftest.$ac_ext >&AS_MESSAGE_LOG_FD'
++ac_link='$CC -o conftest$ac_exeext --main=conftest $GCJFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&AS_MESSAGE_LOG_FD'
++
++# save warnings/boilerplate of simple test code
++_LT_COMPILER_BOILERPLATE
++_LT_LINKER_BOILERPLATE
++
+ # GCJ did not exist at the time GCC didn't implicitly link libc in.
+ _LT_TAGVAR(archive_cmds_need_lc, $1)=no
+ 

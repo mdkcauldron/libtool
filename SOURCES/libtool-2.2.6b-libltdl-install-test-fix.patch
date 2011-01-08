@@ -1,0 +1,11 @@
+--- libtool-2.2.6b/tests/configure-iface.at.bak	2009-11-16 14:11:59.000000000 +0100
++++ libtool-2.2.6b/tests/configure-iface.at	2009-11-27 17:21:30.560755609 +0100
+@@ -139,7 +139,7 @@
+ prefix=`pwd`/_inst
+ 
+ LT_AT_BOOTSTRAP([--ltdl], [-I libltdl/m4], [], [--add-missing], [],
+-        [--with-included-ltdl --prefix=$prefix], [all install])
++        [--with-included-ltdl --prefix=$prefix --enable-ltdl-install], [all install])
+ 
+ # TODO: Check that the installed program `main' is linked against our libltdl
+ AT_CHECK([test -f $prefix/lib/libltdl.la])

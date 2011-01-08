@@ -1,0 +1,30 @@
+From b50042c81d68f2feb7815c8902b90d2e7ba5689f Mon Sep 17 00:00:00 2001
+From: Pixel <pixel@n4.mandriva.com>
+Date: Mon, 26 Jan 2009 10:49:50 +0100
+Subject: [PATCH 5/6] drop-ld-no-undefined-for-shared-lib-modules
+
+cf http://wiki.mandriva.com/en/2009-underlinking-overlinking
+---
+ libltdl/config/ltmain.m4sh |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+
+diff --git a/libltdl/config/ltmain.m4sh b/libltdl/config/ltmain.m4sh
+index 1d10886..4f1776b 100644
+--- a/libltdl/config/ltmain.m4sh
++++ b/libltdl/config/ltmain.m4sh
+@@ -4469,6 +4469,12 @@ func_mode_link ()
+       fi
+     done # argument parsing loop
+ 
++    if test "$module" = yes ; then
++      # [Mandriva] dropping ld option "--no-undefined" which is wrong for plugins
++      linker_flags=`$ECHO "X $linker_flags" | $Xsed -e 's/ --no-undefined//'`
++      compiler_flags=`$ECHO "X $compiler_flags" | $Xsed -e 's/ -Wl,--no-undefined//'`
++    fi
++
+     test -n "$prev" && \
+       func_fatal_help "the \`$prevarg' option requires an argument"
+ 
+-- 
+1.6.1
+
