@@ -8,8 +8,7 @@
 %define _disable_ld_as_needed 1
 
 # allow --with bootstrap
-# (blino) FIXME: define back to 0 once java is in cauldron
-%define bootstrap 1
+%define bootstrap 0
 %{?_with_bootstrap: %global bootstrap 1}
 
 # define biarch platforms
@@ -30,7 +29,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
