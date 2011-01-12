@@ -8,7 +8,7 @@
 %define _disable_ld_as_needed 1
 
 # allow --with bootstrap
-%define bootstrap 0
+%define bootstrap 1
 %{?_with_bootstrap: %global bootstrap 1}
 
 # define biarch platforms
