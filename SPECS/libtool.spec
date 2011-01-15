@@ -29,7 +29,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPL
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -95,9 +95,6 @@ should install libtool.
 %package base
 Group:		Development/C
 Summary:	Basic package for %{name}
-# since Jan 2009, cputoolize is deprecated and partially broken
-# so ensure old %%configure (which was calling cputoolize) is not installed:
-Conflicts:	rpm-manbo-setup-build < 2-15
 Requires:	file
 # cputoolize uses sed
 Requires: 	sed
