@@ -11,6 +11,14 @@
 %define bootstrap 0
 %{?_with_bootstrap: %global bootstrap 1}
 
+%define arch_has_java 1
+%ifarch %arm %mips
+%define arch_has_java 0
+%endif
+%if %bootstrap
+%define arch_has_java 0
+%endif
+
 # define biarch platforms
 %define biarches x86_64 ppc64 sparc64
 %ifarch x86_64
@@ -78,6 +86,8 @@ Buildrequires:	autoconf
 Buildrequires:	locales-de
 %if ! %{bootstrap}
 BuildRequires:	gcc-%{fortran_compiler}
+%endif
+%if %arch_has_java
 BuildRequires:	gcc-java libgcj-static-devel
 %endif
 Requires:	%{name}-base = %{version}-%{release}
