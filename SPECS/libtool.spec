@@ -36,12 +36,11 @@
 
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
-Version:	2.4
-Release:	%mkrel 3
+Version:	2.4.2
+Release:	%mkrel 1
 License:	GPL
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source:		ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{SOURCE0}.sig
