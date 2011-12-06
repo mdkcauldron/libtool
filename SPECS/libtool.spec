@@ -203,7 +203,7 @@ echo ====================TESTING=========================
 set -x
 # all tests must pass here
 # disabling icecream since some tests check the output of gcc
-ICECC=no %make check
+ICECC=no %make check VERBOSE=yes | tee make_check.log 2>&1 # || (cat make_check.log && false)
 set +x
 echo ====================TESTING END=====================
 set -x
