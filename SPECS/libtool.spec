@@ -85,6 +85,7 @@ Buildrequires:	autoconf
 Buildrequires:	locales-de
 %if ! %{bootstrap}
 BuildRequires:	gcc-%{fortran_compiler}
+BuildRequires:	quadmath-devel
 %endif
 %if %arch_has_java
 BuildRequires:	gcc-java libgcj-static-devel
