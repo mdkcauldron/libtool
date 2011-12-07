@@ -37,8 +37,8 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 1
-License:	GPL
+Release:	%mkrel 2
+License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
 
@@ -172,14 +172,14 @@ Development headers, and files for development from the libtool package.
 %ifarch %biarches
 mkdir -p build-%{alt_arch}-%{_target_os}
 pushd    build-%{alt_arch}-%{_target_os}
-linux32 ../configure --prefix=%{_prefix} --build=%{alt_arch}-%{_real_vendor}-%{_target_os}%{?_gnu}
+linux32 ../configure --prefix=%{_prefix} --build=%{alt_arch}-%{_real_vendor}-%{_target_os}%{?_gnu} --disable-static
 linux32 make
 popd
 %endif
 
 mkdir -p build-%{_target_cpu}-%{_target_os}
 pushd    build-%{_target_cpu}-%{_target_os}
-CONFIGURE_TOP=.. %configure2_5x
+CONFIGURE_TOP=.. %configure2_5x --disable-static
 make
 
 # Do not use -nostdlib to build libraries, and so no need to hardcode gcc path (mdvbz#44616)
@@ -211,8 +211,9 @@ set -x
 popd
 
 %install
-rm -fr %{buildroot}
 %makeinstall_std -C build-%{_target_cpu}-%{_target_os}
+
+rm -f %{buildroot}%{_libdir}/*.la
 
 sed -e "s,@prefix@,%{_prefix}," -e "s,@datadir@,%{_datadir}," %{SOURCE2} \
   > %{buildroot}%{_bindir}/cputoolize
@@ -225,9 +226,6 @@ install -m 755 build-%{alt_arch}-%{_target_os}/libtool $RPM_BUILD_ROOT%{_bindir}
 linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 %endif
 
-%clean
-rm -fr %{buildroot}
-
 %post base
 %_install_info %{name}.info
 
@@ -235,7 +233,6 @@ rm -fr %{buildroot}
 %_remove_install_info %{name}.info
 
 %files
-%defattr(-,root,root)
 %doc AUTHORS INSTALL NEWS README
 %doc THANKS TODO ChangeLog*
 %{_bindir}/libtool
@@ -247,7 +244,6 @@ rm -fr %{buildroot}
 %endif
 
 %files base
-%defattr(-,root,root)
 %doc AUTHORS INSTALL NEWS README
 %doc THANKS TODO ChangeLog*
 %{_bindir}/cputoolize
@@ -258,7 +254,6 @@ rm -fr %{buildroot}
 %{_datadir}/aclocal/*.m4
 
 %files -n %{libname}
-%defattr(-,root,root)
 %doc libltdl/README
 %{_libdir}/libltdl.so.%{major}
 %{_libdir}/libltdl.so.%{major}.*
@@ -267,10 +262,4 @@ rm -fr %{buildroot}
 %defattr(-,root,root)
 %doc tests/demo
 %{_includedir}/*
-%{_libdir}/*.a
 %{_libdir}/*.so
-%{_libdir}/*.la
-
-
-
-
