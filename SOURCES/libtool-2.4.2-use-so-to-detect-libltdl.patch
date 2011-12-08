@@ -1,5 +1,14 @@
---- libltdl/m4/ltdl.m4.ltdl	2011-12-08 03:32:39.291682724 +0100
-+++ libltdl/m4/ltdl.m4	2011-12-08 03:33:08.295350302 +0100
+--- libltdl/m4/ltdl.m4.libltdl	2011-12-08 03:46:20.709261116 +0100
++++ libltdl/m4/ltdl.m4	2011-12-08 03:47:46.292453502 +0100
+@@ -166,7 +166,7 @@
+       ;;
+   *)  enable_ltdl_install=yes
+       ac_configure_args="$ac_configure_args --enable-ltdl-install"
+-      LIBLTDL='_LT_BUILD_PREFIX'"${lt_ltdl_dir+$lt_ltdl_dir/}libltdl.la"
++      LIBLTDL='_LT_BUILD_PREFIX'"${lt_ltdl_dir+$lt_ltdl_dir/}libltdl.so"
+       LTDLDEPS=$LIBLTDL
+       LTDLINCL='-I${top_srcdir}'"${lt_ltdl_dir+/$lt_ltdl_dir}"
+       ;;
 @@ -273,10 +273,10 @@
  
  AC_ARG_WITH([ltdl_lib],

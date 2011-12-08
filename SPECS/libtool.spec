@@ -37,7 +37,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -76,7 +76,7 @@ Patch17:	libtool-2.2.6b-libltdl-install-test-fix.patch
 #       file list
 Patch18:	libtool-2.4-dryrun-sleepmore.patch
 # (fwang) detect libltdl.so rather than libltdl.la, as we will delete them
-Patch9:		libtool-2.4.2-use-so-to-detect-libltdl.patch
+Patch19:	libtool-2.4.2-use-so-to-detect-libltdl.patch
 
 %ifarch %biarches
 BuildRequires:	linux32
@@ -158,6 +158,7 @@ Development headers, and files for development from the libtool package.
 %patch16 -p1 -b .gcj-no-cflags
 %patch17 -p1 -b .ignore-system-libltdl
 %patch18 -p1 -b .sleepmore
+%patch19 -p0 -b .libltdl
 
 %build
 ./bootstrap
