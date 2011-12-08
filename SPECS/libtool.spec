@@ -37,7 +37,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -75,6 +75,8 @@ Patch17:	libtool-2.2.6b-libltdl-install-test-fix.patch
 # (cjw) mdemo-dryrun test may fail because file sizes are incorrect in 'before' 
 #       file list
 Patch18:	libtool-2.4-dryrun-sleepmore.patch
+# (fwang) detect libltdl.so rather than libltdl.la, as we will delete them
+Patch9:		libtool-2.4.2-use-so-to-detect-libltdl.patch
 
 %ifarch %biarches
 BuildRequires:	linux32

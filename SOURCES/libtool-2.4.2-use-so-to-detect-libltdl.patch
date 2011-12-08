@@ -1,0 +1,15 @@
+--- libltdl/m4/ltdl.m4.ltdl	2011-12-08 03:32:39.291682724 +0100
++++ libltdl/m4/ltdl.m4	2011-12-08 03:33:08.295350302 +0100
+@@ -273,10 +273,10 @@
+ 
+ AC_ARG_WITH([ltdl_lib],
+     [AS_HELP_STRING([--with-ltdl-lib=DIR],
+-                    [use the libltdl.la installed in DIR])])
++                    [use the libltdl.so installed in DIR])])
+ 
+ if test -n "$with_ltdl_lib"; then
+-  if test -f "$with_ltdl_lib/libltdl.la"; then :
++  if test -f "$with_ltdl_lib/libltdl.so"; then :
+   else
+     AC_MSG_ERROR([invalid ltdl library directory: `$with_ltdl_lib'])
+   fi
