@@ -37,7 +37,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -161,7 +161,7 @@ Development headers, and files for development from the libtool package.
 %patch17 -p1 -b .ignore-system-libltdl
 %patch18 -p1 -b .sleepmore
 %patch19 -p0 -b .libltdl
-%patch20 -p0 -b .ltdl
+#patch20 -p0 -b .ltdl
 
 %build
 ./bootstrap
