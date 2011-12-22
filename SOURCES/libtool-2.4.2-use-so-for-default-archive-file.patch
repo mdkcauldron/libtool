@@ -1,0 +1,11 @@
+--- libltdl/ltdl.c.libtool	2011-12-22 16:40:40.020329419 +0100
++++ libltdl/ltdl.c	2011-12-22 16:40:48.161263620 +0100
+@@ -43,7 +43,7 @@
+ 
+ /* Standard libtool archive file extension.  */
+ #undef  LT_ARCHIVE_EXT
+-#define LT_ARCHIVE_EXT	".la"
++#define LT_ARCHIVE_EXT	".so"
+ 
+ /* max. filename length */
+ #if !defined(LT_FILENAME_MAX)
