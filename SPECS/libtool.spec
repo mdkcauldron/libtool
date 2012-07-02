@@ -37,7 +37,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 6
+Release:	%mkrel 7
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -89,7 +89,9 @@ Buildrequires:	autoconf
 Buildrequires:	locales-de
 %if ! %{bootstrap}
 BuildRequires:	gcc-%{fortran_compiler}
+%ifarch ia64 %ix86 x86_64
 BuildRequires:	quadmath-devel
+%endif
 %endif
 %if %arch_has_java
 BuildRequires:	gcc-java libgcj-static-devel
