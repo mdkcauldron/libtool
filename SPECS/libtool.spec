@@ -37,7 +37,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 7
+Release:	%mkrel 8
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -80,9 +80,6 @@ Patch19:	libtool-2.4.2-use-so-to-detect-libltdl.patch
 # (fwang) use .so as default archive module file for lt_dlopen calls
 Patch20:	libtool-2.4.2-use-so-for-default-archive-file.patch
 
-%ifarch %biarches
-BuildRequires:	linux32
-%endif
 BuildRequires:	automake
 Buildrequires:	autoconf
 # For test 37 to succeed
