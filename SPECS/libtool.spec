@@ -37,7 +37,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -81,9 +81,10 @@ Patch19:	libtool-2.4.2-use-so-to-detect-libltdl.patch
 Patch20:	libtool-2.4.2-use-so-for-default-archive-file.patch
 
 BuildRequires:	automake
-Buildrequires:	autoconf
+BuildRequires:	autoconf
+BuildRequires:	help2man
 # For test 37 to succeed
-Buildrequires:	locales-de
+BuildRequires:	locales-de
 %if ! %{bootstrap}
 BuildRequires:	gcc-%{fortran_compiler}
 %ifarch ia64 %ix86 x86_64
