@@ -92,7 +92,8 @@ BuildRequires:	quadmath-devel
 %endif
 %endif
 %if %arch_has_java
-BuildRequires:	gcc-java libgcj-static-devel
+BuildRequires:	gcc-java 
+BuildRequires:	libgcj-static-devel
 %endif
 Requires:	%{name}-base = %{version}-%{release}
 
@@ -265,7 +266,6 @@ linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 %{_libdir}/libltdl.so.%{major}.*
 
 %files -n %{libname_devel}
-%defattr(-,root,root)
 %doc tests/demo
 %{_includedir}/*
 %{_libdir}/*.so
