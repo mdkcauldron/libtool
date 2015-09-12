@@ -263,7 +263,7 @@ linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 %files -n %{libname}
 %doc libltdl/README
 %{_libdir}/libltdl.so.%{major}
-%{_libdir}/libltdl.so.%{major}{,.*}
+%{_libdir}/libltdl.so.%{major}.*
 
 %files -n %{libname_devel}
 %doc tests/demo
