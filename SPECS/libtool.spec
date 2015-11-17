@@ -2,6 +2,7 @@
 %define libname_orig	libltdl
 %define libname		%mklibname ltdl %{major}
 %define libname_devel	%mklibname -d ltdl
+%define staticdevelname %mklibname %{libname_orig} -d -s
 
 # for the testsuite:
 %define _disable_ld_no_undefined 1
@@ -37,7 +38,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.2
-Release:	%mkrel 14
+Release:	%mkrel 15
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -150,6 +151,13 @@ Obsoletes:	%{mklibname ltdl 3}-devel
 %description -n %{libname_devel}
 Development headers, and files for development from the libtool package.
 
+%package -n %{staticdevelname}
+Summary: libtldl - static library
+Group:   Development/C
+Requires:   %{libname} = %{version}-%{release}
+
+%description -n %{staticdevelname}
+Static library (.a) version of libtldl.
 %prep
 %setup -q
 %patch0 -p1 -b .relink
@@ -179,14 +187,14 @@ Development headers, and files for development from the libtool package.
 %ifarch %biarches
 mkdir -p build-%{alt_arch}-%{_target_os}
 pushd    build-%{alt_arch}-%{_target_os}
-linux32 ../configure --prefix=%{_prefix} --build=%{alt_arch}-%{_real_vendor}-%{_target_os}%{?_gnu} --disable-static
+linux32 ../configure --prefix=%{_prefix} --build=%{alt_arch}-%{_real_vendor}-%{_target_os}%{?_gnu}
 linux32 make
 popd
 %endif
 
 mkdir -p build-%{_target_cpu}-%{_target_os}
 pushd    build-%{_target_cpu}-%{_target_os}
-CONFIGURE_TOP=.. %configure2_5x --disable-static
+CONFIGURE_TOP=.. %configure2_5x
 make
 
 # Do not use -nostdlib to build libraries, and so no need to hardcode gcc path (mdvbz#44616)
@@ -269,3 +277,6 @@ linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 %doc tests/demo
 %{_includedir}/*
 %{_libdir}/*.so
+
+%files -n %{staticdevelname}
+%{_libdir}/*.a
