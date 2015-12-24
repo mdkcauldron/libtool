@@ -7,5 +7,5 @@
 -        [--with-included-ltdl --prefix=$prefix], [all install])
 +        [--with-included-ltdl --prefix=$prefix --enable-ltdl-install], [all install])
  
- # TODO: Check that the installed program `main' is linked against our libltdl
- AT_CHECK([test -f $prefix/lib/libltdl.la])
+ # TODO: Check that the installed program 'main' is linked against our libltdl
+ AT_CHECK([test -f "$prefix/lib/libltdl.la"])

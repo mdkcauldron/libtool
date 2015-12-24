@@ -37,14 +37,14 @@
 
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
-Version:	2.4.2
-Release:	%mkrel 15
+Version:	2.4.6
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
 
 Source:		ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
-Source1:	%{SOURCE0}.sig
+Source1:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
 
 # deprecated: introduced in July 2003
 # (cf http://lists.mandriva.com/cooker-amd64/2003-12/msg00046.php)
@@ -58,28 +58,12 @@ Source2:	libtool-cputoolize.sh
 # (Abel) Patches please only modify ltmain.in and don't touch ltmain.sh
 # otherwise ltmain.sh will not be regenerated, and patches will be lost
 
-# (cjw) when a library that is produced in the build is also linked against, 
-#       make sure that the library in the rpm install dir is used for relinking 
-#	even if (an older version of) the lib is installed on the system
-Patch0:		relink.patch
-#
-Patch1:		lib64.patch
-Patch2:		ltmain-SED.patch
-Patch12:	do-not-link-against-deplibs.patch
-Patch13:	drop-ld-no-undefined-for-shared-lib-modules.patch
-Patch14:	fix-checking-libltdl-is-installed-installable.patch
-# (cjw) do not use CFLAGS when running gcj
-Patch16:	libtool-2.2.6-use-gcjflags-for-gcj.patch
 # (cjw) in the libltdl install test, use --enable-ltdl-install to make sure 
 #       the library is built even if it is installed on the system
 Patch17:	libtool-2.2.6b-libltdl-install-test-fix.patch
-# (cjw) mdemo-dryrun test may fail because file sizes are incorrect in 'before' 
+# (cjw) mdemo test may fail because file sizes are incorrect in 'before'
 #       file list
 Patch18:	libtool-2.4-dryrun-sleepmore.patch
-# (fwang) detect libltdl.so rather than libltdl.la, as we will delete them
-Patch19:	libtool-2.4.2-use-so-to-detect-libltdl.patch
-# (fwang) use .so as default archive module file for lt_dlopen calls
-Patch20:	libtool-2.4.2-use-so-for-default-archive-file.patch
 
 BuildRequires:	automake
 BuildRequires:	autoconf
@@ -160,21 +144,10 @@ Requires:   %{libname} = %{version}-%{release}
 Static library (.a) version of libtldl.
 %prep
 %setup -q
-%patch0 -p1 -b .relink
-%patch1 -p1 -b .lib64
-%patch2 -p1 -b .ltmain-SED
-%patch12 -p1 -b .overlinking
-%patch13 -p1 -b .underlinking
-%patch14 -p1
-%patch16 -p1 -b .gcj-no-cflags
 %patch17 -p1 -b .ignore-system-libltdl
 %patch18 -p1 -b .sleepmore
-%patch19 -p0 -b .libltdl
-#patch20 -p0 -b .ltdl
 
 %build
-./bootstrap
-
 # don't use configure macro - it forces libtoolize, which is bad -jgarzik
 # Use configure macro but define __libtoolize to be /bin/true -Geoff
 %define __libtoolize /bin/true
@@ -274,7 +247,6 @@ linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 %{_libdir}/libltdl.so.%{major}.*
 
 %files -n %{libname_devel}
-%doc tests/demo
 %{_includedir}/*
 %{_libdir}/*.so
 

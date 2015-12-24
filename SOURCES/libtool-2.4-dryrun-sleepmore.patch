@@ -1,47 +1,47 @@
---- libtool-2.4/tests/mdemo-dryrun.test.sleep	2010-11-26 21:36:33.829681074 +0100
-+++ libtool-2.4/tests/mdemo-dryrun.test	2010-11-26 21:36:36.831597238 +0100
-@@ -53,7 +53,7 @@
+--- libtool-2.4.6/tests/mdemo.at.orig	2015-12-24 17:04:56.988843856 -0500
++++ libtool-2.4.6/tests/mdemo.at	2015-12-24 17:05:12.458857065 -0500
+@@ -700,7 +700,7 @@ LT_AT_MAKE([main.$objext])
  
- func_msg "Making object files in mdemo (dry run)"
+ # Making object files
  # ls -l in MSYS sometimes shows year, not time, for really fresh files.
 -sleep 1
 +sleep 3
- ls -l . $objdir | grep -v total > $before
- force_dry_run=: $MAKE foo1.lo foo2.lo sub.lo || exit $?
- ls -l . $objdir | grep -v total > $after
-@@ -63,7 +63,7 @@
+ ls -l . "$objdir" | $EGREP -v '(^total|testsuite.log$)' > "$before"
+ force_dry_run=:
+ LT_AT_MAKE([foo1.lo foo2.lo libsub.la])
+@@ -712,7 +712,7 @@ force_dry_run=false
+ LT_AT_MAKE([foo1.lo foo2.lo libsub.la])
  
- func_msg "Making libraries in mdemo (dry run)"
- # ls -l in MSYS sometimes shows year, not time, for really fresh files.
--sleep 1
-+sleep 3
- ls -l . $objdir | grep -v total > $before
- force_dry_run=: $MAKE foo1.la libfoo2.la || exit $?
- ls -l . $objdir | grep -v total > $after
-@@ -73,7 +73,7 @@
+ # Making libraries
+-sleep 1 # for MSYS
++sleep 3 # for MSYS
+ ls -l . "$objdir" | $EGREP -v '(^total|testsuite.log$)' > "$before"
+ force_dry_run=:
+ LT_AT_MAKE([foo1.la libfoo2.la])
+@@ -724,7 +724,7 @@ force_dry_run=false
+ LT_AT_MAKE([foo1.la libfoo2.la])
  
- func_msg "Making programs in ../mdemo (dry run)"
- # ls -l in MSYS sometimes shows year, not time, for really fresh files.
--sleep 1
-+sleep 3
- ls -l . $objdir | grep -v total > $before
- force_dry_run=: $MAKE mdemo$EXEEXT mdemo_static$EXEEXT 1>&2 || exit $?
- ls -l . $objdir | grep -v total > $after
-@@ -86,7 +86,7 @@
- func_mkdir_p "$prefix/bin"
- func_mkdir_p "$prefix/lib"
- # ls -l in MSYS sometimes shows year, not time, for really fresh files.
--sleep 1
-+sleep 3
- ls -l . $objdir | grep -v total > $before
- ls -lR $prefix | grep -v total >> $before
- force_dry_run=: $MAKE install 1>&2 || exit 1
-@@ -100,7 +100,7 @@
+ # Making programs
+-sleep 1 # for MSYS
++sleep 3 # for MSYS
+ ls -l . "$objdir" | $EGREP -v '(^total|testsuite.log$)' > "$before"
+ force_dry_run=:
+ LT_AT_MAKE([mdemo$EXEEXT mdemo_static$EXEEXT])
+@@ -737,7 +737,7 @@ $lt_INSTALL -d "$prefix/bin"
+ $lt_INSTALL -d "$prefix/include"
+ $lt_INSTALL -d "$prefix/lib"
+ 
+-sleep 1 # for MSYS
++sleep 3 # for MSYS
+ ls -l . "$objdir" | $EGREP -v '(^total|testsuite.log$)' > "$before"
+ ls -lR "$prefix" | $EGREP -v '(^total|testsuite.log$)' >> "$before"
+ force_dry_run=:
+@@ -755,7 +755,7 @@ LT_AT_MAKE([install])
  # Libtool does not uninstall the programs, remove them first
  rm -f "$prefix/bin/mdemo$EXEEXT" "$prefix/bin/mdemo_static$EXEEXT"
- # ls -l in MSYS sometimes shows year, not time, for really fresh files.
--sleep 1
-+sleep 3
- ls -l . $objdir | grep -v total > $before
- ls -lR $prefix | grep -v total >> $before
- force_dry_run=: $MAKE uninstall 1>&2 || exit $?
+ 
+-sleep 1 # for MSYS
++sleep 3 # for MSYS
+ ls -l . "$objdir" | $EGREP -v '(^total|testsuite.log$)' > "$before"
+ ls -lR "$prefix" | $EGREP -v '(^total|testsuite.log$)' >> "$before"
+ force_dry_run=:
