@@ -1,0 +1,17 @@
+diff -up ./m4/ltdl.m4.orig ./m4/ltdl.m4
+--- ./m4/ltdl.m4.orig	2016-02-11 20:40:28.013253981 +0200
++++ ./m4/ltdl.m4	2016-02-11 20:41:07.142760471 +0200
+@@ -282,8 +282,11 @@ AC_ARG_WITH([ltdl_lib],
+                     [use the libltdl.la installed in DIR])])
+ 
+ if test -n "$with_ltdl_lib"; then
+-  if test -f "$with_ltdl_lib/libltdl.la"; then :
+-  else
++  # check for the existence of "$with_ltdl_lib/libltdl.la" while
++  # allowing people to delete the libtool archive file (which isn't
++  # useful in this case in many common platforms.)
++  with_ltdl_lib_libname=`echo "$with_ltdl_lib"/libltdl.*`
++  if test "x$with_ltdl_lib_libname" = "x$with_ltdl_lib/libltdl.*"; then
+     AC_MSG_ERROR([invalid ltdl library directory: '$with_ltdl_lib'])
+   fi
+ else
