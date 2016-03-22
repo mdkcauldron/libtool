@@ -227,7 +227,7 @@ linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 
 %files
 %doc AUTHORS INSTALL NEWS README
-%doc THANKS TODO ChangeLog*
+%doc THANKS TODO
 %{_bindir}/libtool
 %{_mandir}/man1/libtool.1.*
 %ifarch %biarches
@@ -238,7 +238,7 @@ linux32 /bin/sh -c '%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/libtool'
 
 %files base
 %doc AUTHORS INSTALL NEWS README
-%doc THANKS TODO ChangeLog*
+%doc THANKS TODO
 %{_bindir}/cputoolize
 %{_bindir}/libtoolize
 %{_mandir}/man1/libtoolize.*
