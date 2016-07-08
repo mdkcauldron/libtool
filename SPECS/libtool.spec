@@ -38,7 +38,7 @@
 Summary:	The GNU libtool, which simplifies the use of shared libraries
 Name:		libtool
 Version:	2.4.6
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/libtool/libtool.html
@@ -68,6 +68,9 @@ Patch18:	libtool-2.4-dryrun-sleepmore.patch
 #         patch originaly from Gentoo:
 #         https://bugs.gentoo.org/show_bug.cgi?id=293921#c10
 Patch19:	libtool-2.4.6-fix-building-without-libltdl.la.patch
+# (proyvind) add /lib64 & /usr/lib64 to system library path in order to
+#            prevent from being added to rpath
+Patch20:	libtool-2.2.10-rpath.patch
 
 BuildRequires:	automake
 BuildRequires:	autoconf
@@ -151,6 +154,7 @@ Static library (.a) version of libtldl.
 %patch17 -p1 -b .ignore-system-libltdl
 %patch18 -p1 -b .sleepmore
 %patch19 -p1 -b .ltdl.la-fix
+%patch20 -p1 -b .rpath~
 
 %build
 # don't use configure macro - it forces libtoolize, which is bad -jgarzik
